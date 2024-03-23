@@ -24,15 +24,19 @@ export default function App() {
   }, [country, state]);
 
   const fetchCountry = async () => {
-    const response = await fetch(
-      "https://crio-location-selector.onrender.com/countries"
-    );
-    const country_data = await response.json();
-    setData((prev_data) => ({
-      country: country_data,
-      state: prev_data.state,
-      city: prev_data.city,
-    }));
+    try {
+      const response = await fetch(
+        "https://crio-location-selector.onrender.com/countries"
+      );
+      const country_data = await response.json();
+      setData((prev_data) => ({
+        country: country_data,
+        state: prev_data.state,
+        city: prev_data.city,
+      }));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const fetchState = async () => {
